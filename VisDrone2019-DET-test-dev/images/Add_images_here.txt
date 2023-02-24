@@ -1,0 +1,2 @@
+Images have not been added here because of the large size of the dataset.
+Add the corresponding images to this folder before running any of the scripts.
