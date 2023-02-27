@@ -35,7 +35,11 @@ fileNames = [file_name for file_name in listdir(label_dir) if isfile(join(label_
 
 # Add the class labels that will be retained after filtering, eg: 0, 1, 2 
 # Range: 0-9. All labels not added will be filtered out.
-retain_labels = [7, 2, 5]
+retain_labels = [2, 5, 7]
+
+# Setting replace_label_names to true will convert the original labels to
+# the new labels starting from 0. eg: [2, 5, 7] --> [0, 1, 2]
+replace_label_names = True
 
 for file in fileNames:
 
@@ -48,4 +52,7 @@ for file in fileNames:
             
             if(label in retain_labels):
                 with open(os.path.join(output_dir, f"{filename}.txt"), "a+", encoding="utf-8") as file:
-                    file.write(line)
+                    if replace_label_names == True:
+                        line = str(retain_labels.index(label)) + line[1:]
+                    else:
+                        file.write(line)
